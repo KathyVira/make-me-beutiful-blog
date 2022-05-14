@@ -1,0 +1,79 @@
+<div id="smart-button-container" style="display: none ">
+      <div style="text-align: center;">
+        <div id="paypal-button-container"></div>
+      </div>
+    </div>
+  <script src=https://www.paypal.com/sdk/js?client-id=AZqqnpxJ4ZzBKtgLc6KqHGvcB5kIXP_xHcLhUOaj7f8yBAJscpRSHOdk8tfkZA5AXmpBfwLYRsrDpNnT&enable-funding=venmo&currency=ILS data-sdk-integration-source="button-factory"></script>
+  
+  
+  <script>
+
+jQuery( document ).ready( function( $ ) {
+
+  function hiddenFunction()
+{
+	// Now element became hidden
+  $('#smart-button-container').show();
+}
+function visibleFunction()
+{
+	// Now element became visible
+}
+
+var visibilityCounter=0;
+$( '#_form_13_submit' ).on( 'visibility', function() {
+    var $element = $( this );
+    var timer = setInterval( function() {
+      if( $element.is( ':hidden' ) ) {
+        hiddenFunction();
+        visibilityCounter=0;
+      } else {
+        if(visibilityCounter==0)
+        {
+          visibilityCounter=1;
+          visibleFunction();
+        }
+      }
+    }, 500 );
+  }).trigger( 'visibility' );
+
+
+
+	// $( "#_form_13_submit" ).submit(function() {
+	//$('._form_13').hide();
+	// });
+});
+
+    function initPayPalButton() {
+      paypal.Buttons({
+        style: {
+          shape: 'rect',
+          color: 'gold',
+          layout: 'vertical',
+          label: 'paypal',
+        },
+        createOrder: function(data, actions) {
+          return actions.order.create({
+            purchase_units: [{"description":"Онлайн курс - Три шага к самопознанию.\nKак стать мастером своей судьбы?","amount":{"currency_code":"ILS","value":1}}], 
+            application_context: { shipping_preference: "NO_SHIPPING", }
+          });
+        },
+        onApprove: function(data, actions) {
+          return actions.order.capture().then(function(orderData) {          
+            // Full available details
+            console.log('Capture result', orderData, JSON.stringify(orderData, null, 2));
+            // Show a success message within this page, e.g.
+            // const element = document.getElementById('paypal-button-container');
+            // element.innerHTML = '';
+            // element.innerHTML = '<h3>Thank you for your payment!</h3>';
+            // Or go to another URL:  
+            actions.redirect('thank_you.html');       
+          });
+        },
+        onError: function(err) {
+          console.log(err);
+        }
+      }).render('#paypal-button-container');
+    }
+    initPayPalButton();
+  </script>

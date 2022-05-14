@@ -1,0 +1,44 @@
+.navbar-expand-sm{
+    padding: 0 !important;
+    margin: 0 !important;
+}
+
+.navbar {
+    -webkit-box-shadow: none !important;
+    box-shadow: none !important;
+}
+
+.text-14{
+    font-size: 12px !important;
+}
+
+
+#nprogress .bar {
+    height: 4px !important;
+}
+
+.borderRadius-50{
+    border-radius: 50px !important;
+    padding: 5px 10px  !important;
+}
+
+.w-bgr, navbar.navbar-expand-sm.navbar-light.bg-light{
+    background-color: rgb(189, 189, 189) !important;
+    color: black !important;
+padding: 0px;
+}
+
+.nav-link, footer.page-footer .footer-copyright{
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+    font-size: 12px !important;
+}
+
+small, label {
+ display: none;
+}
+
+.ql-editor{
+    min-height: 250px;
+
+}
